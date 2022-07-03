@@ -16,5 +16,9 @@ export class SurveysRepository {
 
         return survey;
     }
-    async findById(){}
+    async list(){
+        const survey = await prisma.surveys.findMany();
+        return survey;
+
+    }
 }
