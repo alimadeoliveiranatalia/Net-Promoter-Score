@@ -1,4 +1,4 @@
-import { prisma } from "../../../../database/prismaClient";
+import { UsersRepositories } from "../../repositories/UsersRepository";
 
 interface ICreateUser {
     name: string;
@@ -7,25 +7,15 @@ interface ICreateUser {
 
 export class CreateUsersUseCase {
     async execute({ name, email }: ICreateUser ){
-        const userAlreadyExists = await prisma.user.findFirst({
-            where: {
-                email: {
-                    equals: "email",
-                    mode: "insensitive"
-                }
-            }
-        });
+        const userRepository = new UsersRepositories();
+
+        const userAlreadyExists = await userRepository.findByEmail(email);
 
         if(userAlreadyExists){
             throw new Error("User Already Exists!");
         }
         
-        const user = await prisma.user.create({
-            data: {
-                name,
-                email
-            }
-        });
+        const user = await userRepository.create(name, email);
 
         return user;
     }
