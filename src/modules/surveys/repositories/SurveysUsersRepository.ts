@@ -16,4 +16,14 @@ export class SurveysUsersRepository {
 
         return survey_user;
     }
+    async findByUser(user_id: string){
+        const surveyNoResponse = await prisma.surveys_Users.findFirst({
+            where: {
+                userId: user_id,
+                value: null
+            }
+        });
+
+        return surveyNoResponse;
+    }
 }

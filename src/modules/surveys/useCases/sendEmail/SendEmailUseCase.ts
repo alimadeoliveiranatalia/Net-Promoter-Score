@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { SendEmailService } from "../../../../services/SendEmailService";
 import { UsersRepositories } from "../../../user/repositories/UsersRepository";
 import { SurveysRepository } from "../../repositories/SurveysRepository";
@@ -34,7 +35,17 @@ export class SendEmailUseCase {
 
         const sendEmailService = new SendEmailService();
         
-        const surveyUser = await sendEmailService.execute(email, survey.title, survey.description);
+        const npsPath = resolve(__dirname, "../../../../", "views", "emails", "npsMail.hbs");
+
+        const variables = {
+            name: user.name,
+            title: survey.title,
+            description: survey.description,
+            user_id: user.id,
+            link: process.env.URL_MAIL
+        }
+        
+        const surveyUser = await sendEmailService.execute(email, survey.title, variables, npsPath);
 
         return surveyUser;
 
