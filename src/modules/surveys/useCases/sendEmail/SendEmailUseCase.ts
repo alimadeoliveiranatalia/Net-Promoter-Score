@@ -1,3 +1,4 @@
+import { SendEmailService } from "../../../../services/SendEmailService";
 import { UsersRepositories } from "../../../user/repositories/UsersRepository";
 import { SurveysRepository } from "../../repositories/SurveysRepository";
 import { SurveysUsersRepository } from "../../repositories/SurveysUsersRepository";
@@ -26,10 +27,16 @@ export class SendEmailUseCase {
 
         const surveysUsersRepository = new SurveysUsersRepository();
 
-        const survey_user = await surveysUsersRepository.create({
+        await surveysUsersRepository.create({
             user_id: user.id,
             survey_id: survey.id
         });
+
+        const sendEmailService = new SendEmailService();
+        
+        const surveyUser = await sendEmailService.execute(email, survey.title, survey.description);
+
+        return surveyUser;
 
 
 
