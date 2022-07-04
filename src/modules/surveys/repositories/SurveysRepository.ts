@@ -21,4 +21,15 @@ export class SurveysRepository {
         return survey;
 
     }
+    async findBySurveyId(id: string) {
+        const survey = await prisma.surveys.findFirst({
+            where: {
+                id: {
+                    equals: id,
+                    mode: "insensitive"
+                }
+            }
+        });
+        return survey;
+    }
 }

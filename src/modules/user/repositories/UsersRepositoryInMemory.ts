@@ -9,12 +9,10 @@ export class UsersRepositoryInMemory {
     private users: User[] = [];
 
     async create({ name, email }: ICreateUserDTO){
-        const user = User;
-        
-        Object.assign(user,{
+        const user = {
             name,
             email
-        });
+        };
 
         this.users.push(user);
         
