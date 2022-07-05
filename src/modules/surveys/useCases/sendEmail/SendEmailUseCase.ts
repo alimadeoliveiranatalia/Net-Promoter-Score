@@ -35,7 +35,7 @@ export class SendEmailUseCase {
             name: user.name,
             title: survey.title,
             description: survey.description,
-            user_id: user.id,
+            id: "",
             link: process.env.URL_MAIL
         }
 
@@ -44,15 +44,19 @@ export class SendEmailUseCase {
         const sendEmailService = new SendEmailService();
 
         if(surveyAlreadyExistsForUser) {
+            variables.id =surveyAlreadyExistsForUser.id;
+
             await sendEmailService.execute(email, survey.title, variables, npsPath);
 
             return surveyAlreadyExistsForUser;
         }
 
-        await surveysUsersRepository.create({
+        const surveyUserCreate = await surveysUsersRepository.create({
             user_id: user.id,
             survey_id: survey.id
         });
+
+        variables.id = surveyUserCreate.id;
                 
         const surveyUser = await sendEmailService.execute(email, survey.title, variables, npsPath);
 
