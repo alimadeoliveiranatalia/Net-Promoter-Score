@@ -26,4 +26,24 @@ export class SurveysUsersRepository {
 
         return surveyNoResponse;
     }
+    async findUserSurveyByID(id: string){
+        const surveyNoResponse = await prisma.surveys_Users.findFirst({
+            where: {
+                id: id
+            }
+        });
+
+        return surveyNoResponse;
+    }
+    async updateValue(surveyUserId: string,value: number){
+        const valueSurvey = await prisma.surveys_Users.update({
+            where: {
+                id: surveyUserId
+            },
+            data: {
+                value
+            }
+        }); 
+        return valueSurvey;
+    }
 }
