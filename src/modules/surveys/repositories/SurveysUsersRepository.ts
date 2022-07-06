@@ -46,4 +46,15 @@ export class SurveysUsersRepository {
         }); 
         return valueSurvey;
     }
+    async findSurveysNotNull(survey_id: string){
+        const surveys = await prisma.surveys_Users.findMany({
+            where: {
+                surveyId: survey_id,
+                NOT : {
+                    value: null
+                }
+            }
+        });
+        return surveys;
+    }
 }
