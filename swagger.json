@@ -133,43 +133,18 @@
                 }
             }
         },
-        "/answers/{value}": { 
-            "get": {
-                "summary":"List all Answers",
-                "responses": {
-                    "200": {
-                        "description":"Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string"
-                                        },
-                                        "user": {
-                                            "type": "string"
-                                        },
-                                        "survey": {
-                                            "type": "string"
-                                        },
-                                        "value": {
-                                            "type": "number"
-                                        },
-                                        "created_at": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/nps/{survey_id}": {
             "get": {
                 "summary": "Calculation NPS",
+                "parameters": [{
+                    "in": "path",
+                    "name": "survey_id",
+                    "required": true,
+                    "description": "ID Survey",
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
                 "responses": {
                     "200": {
                         "description": "Success",
