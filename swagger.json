@@ -1,0 +1,203 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Net Promoter Score",
+      "description": "API Rest para medir a lealdade dos clientes",
+      "version": "0.1.9"   
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "summary": "Add new User",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": { 
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "User",
+                                    "email": "user_email@.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "User Already Exists"
+                    }
+        
+                }
+            }
+        },        
+        "/surveys": {
+            "post":{
+                "summary": "Create a new Survey",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title":"Pesquisa de satisfação de compra",
+                                    "description":"Gostaríamos de saber o quanto ficou safisfeito"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    }       
+                }
+            },
+            "get": {
+                "summary":"List all Surveys",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "title": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/send-email": {
+            "post": {
+                "summary":"Send Email ",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "survey_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "user_email@.com",
+                                    "survey_id": "f5f037fd-c7f7-4d62-82e7-e7f1fc19d2ac"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "User or Survey does not Exists"
+                    }
+                }
+            }
+        },
+        "/answers/{value}": { 
+            "get": {
+                "summary":"List all Answers",
+                "responses": {
+                    "200": {
+                        "description":"Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "string"
+                                        },
+                                        "survey": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "number"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nps/{survey_id}": {
+            "get": {
+                "summary": "Calculation NPS",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "detractors": { "type": "number" },
+                                        "promoters": { "type": "number" },
+                                        "passive": { "type": "number" },
+                                        "allAnswers": { "type": "number" },
+                                        "nps": { "type": "number" }
+                                    },
+                                    "example": {
+                                        "detractors": "10",
+                                        "promoters": "6",
+                                        "passives": "5",
+                                        "allAnswers": "21",
+                                        "nps": "19.047"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+        
+}
