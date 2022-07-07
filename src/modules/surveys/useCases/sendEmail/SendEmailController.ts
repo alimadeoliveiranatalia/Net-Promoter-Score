@@ -12,6 +12,6 @@ export class SendEmailController {
             survey_id
         });
 
-        return response.json(surveyUser);
+        return response.status(201).json(surveyUser);
     }
 }

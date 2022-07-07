@@ -12,6 +12,6 @@ export class CreateSurveysController {
             description
         });
 
-        return response.json(survey);
+        return response.status(201).json(survey);
     }
 }
