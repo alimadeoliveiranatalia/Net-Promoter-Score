@@ -3,7 +3,7 @@
         <img src ="/tmp/satisfaction.png" width= "150px">
     </a>
 </div>
-<h4>API Rest para métricas NPS</h4>
+<h2>API Rest para métricas NPS</h2>
 <br>
 <p>Esta API possui o objeto de apresentar o cáculo do NPS para avaliar o grau de experiência e satisfação dos clientes.  </p>
 <br>
