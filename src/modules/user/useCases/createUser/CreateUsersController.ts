@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { CreateUsersUseCase } from "./CreateUsersUseCase";
 
 export class CreateUsersController {
-    async handle(request: Request, response: Response) {
+    
+    async handle(request: Request, response: Response) : Promise<Response>{
         const { name, email } = request.body;
 
         const createUsersUseCase = new CreateUsersUseCase();

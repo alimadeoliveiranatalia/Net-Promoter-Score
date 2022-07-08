@@ -16,10 +16,10 @@
     <li>Swagger-ui-express</li>
 </ul>
 <br>
-<h6>Principais Regras de Negócios Desenvolvidas:</h6>
+<h6>Principais Casos de Usos Desenvolvidos:</h6>
 <ul>
     <li>O usuário é registrado na plataforma através do nome e email.</li>
     <li>As pesquisas direcionadas aos usuários são registradas por meio título e descrição.</li>
     <li>A pesquisa é enviada para o email do usuário.</li>
-    <li>O cáculo do NPS só efetudo em pesquisas respondidas.</li>
+    <li>O cáculo do NPS só é efetudo em pesquisas respondidas.</li>
 </ul>

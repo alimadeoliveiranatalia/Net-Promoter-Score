@@ -6,6 +6,7 @@ interface ICreateUser {
 }
 
 export class CreateUsersUseCase {
+    
     async execute({ name, email }: ICreateUser ){
         const userRepository = new UsersRepositories();
 
